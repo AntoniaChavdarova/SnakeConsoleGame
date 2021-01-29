@@ -1,6 +1,8 @@
 ﻿namespace SimpleSnake
 {
     using SimpleSnake.GameObjects;
+    using SimpleSnake.GameObjects.Foods;
+    using System.Collections.Generic;
     using Utilities;
 
     public class StartUp
@@ -9,9 +11,12 @@
         {
             ConsoleWindow.CustomizeConsole();
 
-            Point point = new Point(0, 0);
+           
+            Wall wall = new Wall(60 , 30);
 
-            point.Draw('@');
+            Food food = new FoodHash(wall);
+            food.SetRandomPosition(new Queue<Point>());
+            
 
         }
     }
