@@ -1,5 +1,6 @@
 ﻿namespace SimpleSnake
 {
+    using SimpleSnake.Core;
     using SimpleSnake.GameObjects;
     using SimpleSnake.GameObjects.Foods;
     using System.Collections.Generic;
@@ -10,13 +11,12 @@
         public static void Main()
         {
             ConsoleWindow.CustomizeConsole();
+            Wall wall = new Wall(60, 20);
+            Snake snake = new Snake(wall);
 
-           
-            Wall wall = new Wall(60 , 30);
+            Engine engine = new Engine(wall, snake);
+            engine.Run();
 
-            Food food = new FoodHash(wall);
-            food.SetRandomPosition(new Queue<Point>());
-            
 
         }
     }
