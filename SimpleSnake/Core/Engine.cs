@@ -23,7 +23,7 @@ namespace SimpleSnake.Core
             this.direction = Direction.Right;
             this.directionPoints = new Dictionary<Direction, Point>();
             this.sleepTime = 100;
-            this.level = 1;
+            this.Level = level;
         }
 
         public int Level { get; set; }
@@ -42,9 +42,15 @@ namespace SimpleSnake.Core
                 Point currentPointDirection = this.directionPoints[this.direction];
                 bool isMoved = this.snake.IsMoving(currentPointDirection);
 
+                if(this.snake.TotalPoints == 6)
+                {
+                    this.Level++;
+                }
+
                 if (!isMoved)
                 {
-                    this.AskUserForRestart();
+                   
+                   StopGame();
                 }
                 this.sleepTime -= 0.01;
 
@@ -52,25 +58,7 @@ namespace SimpleSnake.Core
             }
         }
 
-        private void AskUserForRestart()
-        {
-            int leftX = this.wall.LeftX + 1;
-            int topY = 3;
-
-            Console.SetCursorPosition(leftX, topY);
-            Console.Write("Would you like to continue? y/n");
-            string input = Console.ReadLine();
-
-            if (input == "y")
-            {
-                Console.Clear();
-                StartUp.Main();
-            }
-            else
-            {
-                StopGame();
-            }
-        }
+    
 
         private void StopGame()
         {
@@ -78,7 +66,7 @@ namespace SimpleSnake.Core
             Console.SetCursorPosition(20, 10);
             Console.WriteLine("GAME OVER!!!");
             Console.WriteLine($"Total points: {snake.TotalPoints}");
-            Console.WriteLine($"Level: {this.level}");
+            Console.WriteLine($"Level: {this.Level}");
             Environment.Exit(0);
         }
 

@@ -12,10 +12,17 @@
         {
             ConsoleWindow.CustomizeConsole();
             Wall wall = new Wall(60, 20);
+            Food food = new FoodAsterisk(wall);
+
             Snake snake = new Snake(wall);
+
 
             Engine engine = new Engine(wall, snake);
             engine.Run();
+            
+           
+            
+
 
 
         }
